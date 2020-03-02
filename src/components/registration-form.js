@@ -1,21 +1,29 @@
 import React from "react"
 import { withFormik, Form, Field } from "formik"
-import * as Yup from "yup"
 import styled from 'styled-components';
+import * as Yup from "yup"
 import "./layout.css"
 
 const LoginForm = () => {
   return (
     <>
       <FormContainer>
-          <h1>Login</h1>
+        <h1>Registration</h1>
         <FormGroup className="form-group">
-          <Label htmlFor="loginEmail">Email</Label>
-          <Field as={Input} name="loginEmail" id="loginEmail" />
+          <Label htmlFor="registerName">Name</Label>
+          <Field as={Input} name="registerName" id="registerName" />
         </FormGroup>
         <FormGroup className="form-group">
-          <Label htmlFor="loginPassword">Password</Label>
-          <Field as={Input} name="loginPassword" id="loginPassword" type="password" />
+          <Label htmlFor="registerEmail">Email</Label>
+          <Field as={Input} name="registerEmail" id="registerEmail" />
+        </FormGroup>
+        <FormGroup className="form-group">
+          <Label htmlFor="registerPassword">Password</Label>
+          <Field as={Input} name="registerPassword" id="registerPassword" type="password" />
+        </FormGroup>
+        <FormGroup className="form-group">
+          <Label htmlFor="confirmPassword">Confirm Password</Label>
+          <Field as={Input} name="confirmPassword" id="confirmPassword" type="password" />
         </FormGroup>
         <Button type='submit'>Login</Button>
       </FormContainer>
@@ -67,19 +75,26 @@ const Button = styled.button`
 export default withFormik({
   mapPropsToValues() {
     return {
-      loginEmail: "",
-      loginPassword: ""
+      registerName: "",
+      registerEmail: "",
+      registerPassword: "",
+      confirmPassword: "",
+      image: "",
     }
   },
   validationSchema: Yup.object().shape({
-    loginEmail: Yup.string()
+    registerName: Yup.string().required(),
+    registerEmail: Yup.string()
       .email()
       .required(),
-      loginPassword: Yup.string()
+      registerPassword: Yup.string()
       .length(6, "Password needs to be more than 5 characters")
-      .required("Password is required")
+      .required("Password is required"),
+      confirmPassword: Yup.string().required(),
+      image: null,
   }),
   handleSubmit(values, { setStatus, resetForm }) {
+    console.log('submitted');
     console.log(values)
   },
-})(LoginForm);
+})(LoginForm)
