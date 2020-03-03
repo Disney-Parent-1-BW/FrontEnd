@@ -12,8 +12,8 @@ const LoginPage = () => (
   <Layout>
     <SEO title="Login" />
     <Container className="main-container">
-      <Row>
-        <Col>
+      <Row xs='1' sm='1' md='2' xl='2'>
+        <Col >
           <Image />
         </Col>
         <Col>
@@ -23,9 +23,5 @@ const LoginPage = () => (
     </Container>
   </Layout>
 )
-
-const FullHeightRow = styled(Row)`
-  height: 100vh;
-`;
 
 export default LoginPage;
