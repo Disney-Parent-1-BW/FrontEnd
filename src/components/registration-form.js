@@ -2,6 +2,7 @@ import React, {useEffect, useState, useRef, useCallback} from "react";
 import styled from 'styled-components';
 import {useForm} from 'react-hook-form';
 import {useDropzone} from 'react-dropzone';
+import axios from 'axios';
 import * as Yup from "yup"
 import uploadIcon from '../images/upload-icon.png';
 import "./layout.css"
@@ -13,13 +14,23 @@ const LoginForm = () => {
   const inputRef = useRef(register);
 
   const onSubmit = data => {
-    console.log({
-      ...data,
-      image: profileImage
+    const postValues = {
+      name: data.registerName,
+      username: data.registerEmail,
+      password: data.registerPassword,
+      isProvider: false
+    }
+    axios.post('https://disney-kids.herokuapp.com/api/auth/register', postValues)
+    .then(res => {
+      console.log(res);
+      setProfileImageUrl(null);
+      setProfileImage(null);
+      reset();
     })
-    setProfileImageUrl(null);
-    setProfileImage(null);
-    reset();
+    .catch(err => {
+      console.log(err);
+    })
+    
   };
 
   const onDrop = useCallback(acceptedFiles => {
