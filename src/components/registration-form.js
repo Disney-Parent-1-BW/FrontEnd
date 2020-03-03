@@ -7,7 +7,7 @@ import uploadIcon from '../images/upload-icon.png';
 import "./layout.css"
 
 const LoginForm = () => {
-  const {register, errors, handleSubmit, watch} = useForm();
+  const {register, errors, handleSubmit, watch, reset} = useForm();
   const [profileImageUrl, setProfileImageUrl] = useState();
   const [profileImage, setProfileImage] = useState();
   const inputRef = useRef(register);
@@ -17,6 +17,9 @@ const LoginForm = () => {
       ...data,
       image: profileImage
     })
+    setProfileImageUrl(null);
+    setProfileImage(null);
+    reset();
   };
 
   const onDrop = useCallback(acceptedFiles => {
