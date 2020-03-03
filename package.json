@@ -5,6 +5,7 @@
   "version": "0.1.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
+    "@types/react": "^16.9.23",
     "bootstrap": "^4.4.1",
     "formik": "^2.1.4",
     "gatsby": "^2.19.7",
@@ -15,14 +16,18 @@
     "gatsby-plugin-sharp": "^2.4.3",
     "gatsby-source-filesystem": "^2.1.46",
     "gatsby-transformer-sharp": "^2.3.13",
+    "jquery": "^3.4.1",
+    "popper.js": "^1.16.1",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-dropzone": "^10.2.1",
     "react-helmet": "^5.2.1",
     "react-hook-form": "^4.10.1",
+    "react-is": "^16.13.0",
     "reactstrap": "^8.4.1",
     "styled-components": "^5.0.1",
+    "typescript": "^3.8.3",
     "yup": "^0.28.1"
   },
   "devDependencies": {

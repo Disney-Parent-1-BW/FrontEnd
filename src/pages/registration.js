@@ -12,7 +12,7 @@ const RegistrationPage = () => (
   <Layout>
     <SEO title="Login" />
     <Container className="main-container">
-      <Row>
+      <Row xs='1' md='2' lg='2'>
         <Col>
           <Image />
         </Col>

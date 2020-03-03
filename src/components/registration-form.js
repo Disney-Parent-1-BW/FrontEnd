@@ -110,6 +110,10 @@ const FormContainer = styled.form`
         text-align: center;
         font-weight: 400;
     }
+
+    @media (max-width: 768px){
+      max-width: 100%;
+    }
 `;
 
 const FormGroup = styled.div`
@@ -122,7 +126,7 @@ const Label = styled.label`
 
 const Input = styled.input`
     height: 58px;
-    width: 300px;
+    width: 100%;
     border-radius: 3px;
     border: 1px solid #7D70FE;
     background: #fff;
