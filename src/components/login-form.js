@@ -8,12 +8,12 @@ import "./layout.css"
 const LoginForm = () => {
   const { register, handleSubmit, watch, errors, reset } = useForm()
   const inputRef = useRef(register)
+  
   const onSubmit = data => {
     const postValues = {
       username: data.loginEmail,
       password: data.loginPassword
     }
-    console.log(postValues);
     axios.post('https://disney-kids.herokuapp.com/api/auth/login', postValues)
     .then(res => {
       console.log(res);
