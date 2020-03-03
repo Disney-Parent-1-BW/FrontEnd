@@ -1,21 +1,31 @@
-import React from "react"
-import { withFormik, Form, Field } from "formik"
+import React, {useEffect, useRef} from "react"
 import * as Yup from "yup"
+import {useForm} from 'react-hook-form';
 import styled from 'styled-components';
 import "./layout.css"
 
 const LoginForm = () => {
+  const { register, handleSubmit, watch, errors } = useForm();
+  const inputRef = useRef(register);
+  const onSubmit = data => {console.log(data)};
+
+  useEffect(() => {
+    console.log(errors);
+  }, [errors])
+
   return (
-    <>
-      <FormContainer>
+    <><FormContainer onSubmit={handleSubmit(onSubmit)}>
           <h1>Login</h1>
         <FormGroup className="form-group">
-          <Label htmlFor="email">Email</Label>
-          <Field as={Input} name="email" id="name" />
+          <Label htmlFor="loginEmail">Email</Label>
+          <Input ref={inputRef.current({required: true})} name="loginEmail" id="loginEmail" />
+          {(errors.loginEmail && errors.loginEmail.type  === 'required') && <span>This field is required</span>}
         </FormGroup>
         <FormGroup className="form-group">
-          <Label htmlFor="password">Password</Label>
-          <Field as={Input} name="password" id="password" type="password" />
+          <Label htmlFor="loginPassword">Password</Label>
+          <Input ref={inputRef.current({ required: true, minLength: 6 })} name="loginPassword" id="loginPassword" type="password" />
+          {(errors.loginPassword && errors.loginPassword.type  === 'required') && <span>This field is required</span>}
+          {(errors.loginPassword && errors.loginPassword.type  === 'minLength') && <span>Please use more than 5 characters</span>}
         </FormGroup>
         <Button type='submit'>Login</Button>
       </FormContainer>
@@ -23,7 +33,7 @@ const LoginForm = () => {
   )
 }
 
-const FormContainer = styled(Form)`
+const FormContainer = styled.form`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -64,22 +74,24 @@ const Button = styled.button`
     align-self: center;
 `;
 
-export default withFormik({
-  mapPropsToValues() {
-    return {
-      email: "",
-      password: ""
-    }
-  },
-  validationSchema: Yup.object().shape({
-    email: Yup.string()
-      .email()
-      .required(),
-    password: Yup.string()
-      .length(6, "Password needs to be more than 5 characters")
-      .required("Password is required")
-  }),
-  handleSubmit(values, { setStatus, resetForm }) {
-    console.log(values)
-  },
-})(LoginForm)
+export default LoginForm;
+
+// export default withFormik({
+//   mapPropsToValues() {
+//     return {
+//       loginEmail: "",
+//       loginPassword: ""
+//     }
+//   },
+//   validationSchema: Yup.object().shape({
+//     loginEmail: Yup.string()
+//       .email()
+//       .required(),
+//       loginPassword: Yup.string()
+//       .length(6, "Password needs to be more than 5 characters")
+//       .required("Password is required")
+//   }),
+//   handleSubmit(values, { setStatus, resetForm }) {
+//     console.log(values)
+//   },
+// })(LoginForm);
