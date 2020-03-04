@@ -7,7 +7,7 @@ import { Layout } from "antd"
 import Header from "./header"
 import "./layout.css"
 
-const Layout = ({ children }) => {
+const LayoutComponent = ({ children }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -43,4 +43,4 @@ Layout.propTypes = {
   children: PropTypes.node.isRequired,
 }
 
-export default Layout
+export default LayoutComponent
