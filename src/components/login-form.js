@@ -1,28 +1,43 @@
-import React, { useEffect, useRef } from "react"
-import axios from 'axios';
+import React, { useState, useEffect, useRef } from "react"
+import axios from "axios"
 import * as Yup from "yup"
 import { useForm } from "react-hook-form"
-import {Row, Input, Button} from 'antd';
+import { Row, Input, Button, Form, Alert } from "antd"
 import styled from "styled-components"
 import "./layout.css"
 
 const LoginForm = () => {
   const { register, handleSubmit, watch, errors, reset } = useForm()
+  const [submitError, setSubmitError] = useState({});
+  const [form] = Form.useForm();
   const inputRef = useRef(register)
-  
+
   const onSubmit = data => {
     const postValues = {
       username: data.loginEmail,
-      password: data.loginPassword
+      password: data.loginPassword,
     }
     axios.post('https://disney-kids.herokuapp.com/api/auth/login', postValues)
     .then(res => {
       console.log(res);
-      reset();
+      setSubmitError({
+        type: 'success',
+        message: 'Successfully logged in'
+      })
+      form.resetFields();
     })
     .catch(err => {
       console.log(err);
+      setSubmitError({
+        type: 'error',
+        message: 'Login failed. Check your username and password'
+      })
+      form.resetFields();
     })
+  }
+
+  const onFinishFailed = ({values, errorFields, outOfDate}) => {
+    console.log(errorFields);
   }
 
   useEffect(() => {
@@ -31,46 +46,61 @@ const LoginForm = () => {
 
   return (
     <>
-      <FormContainer onSubmit={handleSubmit(onSubmit)}>
+      <FormContainer form={form} layout="vertical" onFinish={onSubmit} onFinishFailed={onFinishFailed}>
         <h1>Login</h1>
-        <Row>
-          <label htmlFor="loginEmail">Email</label>
+        {submitError.type === 'success' || submitError.type === 'error' ? <Alert type={submitError.type} message={submitError.message} />  : null }
+        <Form.Item
+          name="loginEmail"
+          label="Email"
+          rules={[
+            {
+              required: true,
+              message: "This field is required",
+            },
+          ]}
+        >
           <StyledInput
-            size='large'
-            ref={inputRef.current({ required: true })}
-            name="loginEmail"
+            size="large"
             id="loginEmail"
           />
-          {errors.loginEmail && errors.loginEmail.type === "required" && (
-            <span>This field is required</span>
-          )}
-        </Row>
-        <Row className="form-group">
-          <label htmlFor="loginPassword">Password</label>
-          <StyledInput
-            size='large'
-            ref={inputRef.current({ required: true, minLength: 6 })}
-            name="loginPassword"
+        </Form.Item>
+        {errors.loginEmail && errors.loginEmail.type === "required" && (
+          <span>This field is required</span>
+        )}
+        <Form.Item
+          name="loginPassword"
+          label="Password"
+          rules={[
+            {
+              required: true,
+              message: "This field is required!",
+            },
+          ]}
+        >
+          <StyledInput.Password
+            size="large"
             id="loginPassword"
-            type="password"
           />
-          {errors.loginPassword && errors.loginPassword.type === "required" && (
-            <span>This field is required</span>
-          )}
-          {errors.loginPassword &&
-            errors.loginPassword.type === "minLength" && (
-              <span>Please use more than 5 characters</span>
-            )}
-        </Row>
-        <Row justify='center'>
-          <StyledButton size="large" type="primary" htmlType='submit'>Login</StyledButton>
+        </Form.Item>
+        {errors.loginPassword && errors.loginPassword.type === "required" && (
+          <span>This field is required</span>
+        )}
+        {errors.loginPassword && errors.loginPassword.type === "minLength" && (
+          <span>Please use more than 5 characters</span>
+        )}
+        <Row justify="center">
+          <Form.Item>
+            <StyledButton size="large" type="primary" htmlType="submit">
+              Login
+            </StyledButton>
+          </Form.Item>
         </Row>
       </FormContainer>
     </>
   )
 }
 
-const FormContainer = styled.form`
+const FormContainer = styled(Form)`
   font-family: "Roboto";
 
   h1 {
