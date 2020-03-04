@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef, useCallback } from "react"
 import styled from "styled-components"
 import { useForm } from "react-hook-form"
 import { useDropzone } from "react-dropzone"
-import { Row, Button, Input, Form, Upload } from "antd"
+import { Row, Button, Input, Form, Upload, Alert, Checkbox } from "antd"
 import { InboxOutlined } from "@ant-design/icons"
 import axios from "axios"
 import * as Yup from "yup"
@@ -10,10 +10,11 @@ import uploadIcon from "../images/upload-icon.png"
 import "./layout.css"
 
 const LoginForm = () => {
-  const { register, errors, handleSubmit, watch, reset } = useForm()
+  const { register, errors, handleSubmit, watch, reset } = useForm();
   const [form] = Form.useForm();
-  const [profileImageUrl, setProfileImageUrl] = useState()
-  const [profileImage, setProfileImage] = useState()
+  const [profileImageUrl, setProfileImageUrl] = useState();
+  const [submitError, setSubmitError] = useState({});
+  const [profileImage, setProfileImage] = useState();
   const inputRef = useRef(register)
 
   const onSubmit = data => {
@@ -21,16 +22,24 @@ const LoginForm = () => {
       name: data.registerName,
       username: data.registerEmail,
       password: data.registerPassword,
-      isProvider: false,
+      isProvider: data.isProvider,
     }
     axios
       .post("https://disney-kids.herokuapp.com/api/auth/register", postValues)
       .then(res => {
         console.log(res)
+        setSubmitError({
+          type: "success",
+          message: "You've successfully registered!"
+        })
         form.resetFields();
       })
       .catch(err => {
         console.log(err)
+        setSubmitError({
+          type: 'error',
+          message: "Registration failed. Check your username and password and try again."
+        })
         form.resetFields();
       })
   }
@@ -96,6 +105,7 @@ const LoginForm = () => {
         onFinish={onSubmit}
       >
         <h1>Registration</h1>
+        {submitError.type === 'success' || submitError.type === 'error' ? <Alert type={submitError.type} message={submitError.message} /> : null}
         <Form.Item
           label="Name"
           name="registerName"
@@ -196,6 +206,10 @@ const LoginForm = () => {
               <p className='ant-upload-text'>Click or drag file to this area to upload</p>
             </Upload.Dragger>
           </Form.Item>
+          <Form.Item
+            name="isProvider" valuePropName="checked">
+              <Checkbox>I am a childcare provider</Checkbox>
+            </Form.Item>
         </Form.Item>
         <Row justify="center">
           <StyledButton htmlType="submit" type="primary">
