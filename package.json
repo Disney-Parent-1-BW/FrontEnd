@@ -6,11 +6,13 @@
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
     "@types/react": "^16.9.23",
+    "antd": "^4.0.0",
     "axios": "^0.19.2",
     "babel-plugin-styled-components": "^1.10.7",
     "bootstrap": "^4.4.1",
     "formik": "^2.1.4",
     "gatsby": "^2.19.7",
+    "gatsby-cli": "^2.10.0",
     "gatsby-image": "^2.2.39",
     "gatsby-plugin-manifest": "^2.2.39",
     "gatsby-plugin-offline": "^3.0.32",

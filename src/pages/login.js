@@ -1,7 +1,6 @@
 import React from "react"
-import { Container, Row, Col } from 'reactstrap';
+import {Row, Col} from 'antd';
 import styled from 'styled-components';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Layout from "../components/login-layout"
 import Image from "../components/image"
@@ -11,17 +10,21 @@ import LoginForm from '../components/login-form';
 const LoginPage = () => (
   <Layout>
     <SEO title="Login" />
-    <Container className="main-container">
-      <Row xs='1' sm='1' md='2' xl='2'>
-        <Col >
+    <div className="main-container">
+      <Row justify='center'>
+        <ColStyled xs={24} sm={24} md={12}>
           <Image />
-        </Col>
-        <Col>
+        </ColStyled>
+        <ColStyled xs={24} sm={24} md={12}>
           <LoginForm />
-        </Col>
+        </ColStyled>
       </Row>
-    </Container>
+    </div>
   </Layout>
 )
+
+const ColStyled = styled(Col)`
+  max-width: 415px;
+`;
 
 export default LoginPage;
