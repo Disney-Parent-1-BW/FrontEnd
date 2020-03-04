@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react"
 import axios from 'axios';
 import * as Yup from "yup"
 import { useForm } from "react-hook-form"
+import {Row, Input, Button} from 'antd';
 import styled from "styled-components"
 import "./layout.css"
 
@@ -32,9 +33,10 @@ const LoginForm = () => {
     <>
       <FormContainer onSubmit={handleSubmit(onSubmit)}>
         <h1>Login</h1>
-        <FormGroup className="form-group">
-          <Label htmlFor="loginEmail">Email</Label>
-          <Input
+        <Row>
+          <label htmlFor="loginEmail">Email</label>
+          <StyledInput
+            size='large'
             ref={inputRef.current({ required: true })}
             name="loginEmail"
             id="loginEmail"
@@ -42,10 +44,11 @@ const LoginForm = () => {
           {errors.loginEmail && errors.loginEmail.type === "required" && (
             <span>This field is required</span>
           )}
-        </FormGroup>
-        <FormGroup className="form-group">
-          <Label htmlFor="loginPassword">Password</Label>
-          <Input
+        </Row>
+        <Row className="form-group">
+          <label htmlFor="loginPassword">Password</label>
+          <StyledInput
+            size='large'
             ref={inputRef.current({ required: true, minLength: 6 })}
             name="loginPassword"
             id="loginPassword"
@@ -58,24 +61,21 @@ const LoginForm = () => {
             errors.loginPassword.type === "minLength" && (
               <span>Please use more than 5 characters</span>
             )}
-        </FormGroup>
-        <Button type="submit">Login</Button>
+        </Row>
+        <Row justify='center'>
+          <StyledButton size="large" type="primary" htmlType='submit'>Login</StyledButton>
+        </Row>
       </FormContainer>
     </>
   )
 }
 
 const FormContainer = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  max-width: 300px;
-  margin-top: 65px;
   font-family: "Roboto";
 
   h1 {
-    text-align: center;
     font-weight: 400;
+    text-align: center;
   }
 
   @media (max-width: 768px) {
@@ -83,31 +83,18 @@ const FormContainer = styled.form`
   }
 `
 
-const FormGroup = styled.div`
-  width: 100%;
-`
-
-const Label = styled.label`
-  width: 100%;
-`
-
-const Input = styled.input`
+const StyledInput = styled(Input)`
   height: 58px;
-  width: 100%;
-  border-radius: 3px;
-  border: 1px solid #7d70fe;
+  border-color: #7d70fe;
   background: #fff;
   padding: 0 20px;
 `
 
-const Button = styled.button`
+const StyledButton = styled(Button)`
   width: 185px;
   height: 41px;
   background: #7d70fe;
-  border: none;
-  border-radius: 5px;
-  color: #fff;
-  align-self: center;
+  border-radius: 4px;
 `
 
 export default LoginForm

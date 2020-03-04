@@ -1,5 +1,5 @@
 import React from "react"
-import { Container, Row, Col } from 'reactstrap';
+import { Row, Col } from 'antd';
 import styled from 'styled-components';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -11,21 +11,21 @@ import LoginForm from '../components/registration-form';
 const RegistrationPage = () => (
   <Layout>
     <SEO title="Login" />
-    <Container className="main-container">
-      <Row xs='1' md='2' lg='2'>
-        <Col>
+    <div className="main-container">
+      <Row justify='center'>
+        <ColStyled  xs={24} sm={24} md={12}>
           <Image />
-        </Col>
-        <Col>
+        </ColStyled>
+        <ColStyled  xs={24} sm={24} md={12}>
           <LoginForm />
-        </Col>
+        </ColStyled>
       </Row>
-    </Container>
+    </div>
   </Layout>
 )
 
-const FullHeightRow = styled(Row)`
-  height: 100vh;
+const ColStyled = styled(Col)`
+  max-width: 415px;
 `;
 
 export default RegistrationPage;
