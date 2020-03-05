@@ -8,6 +8,7 @@ import axios from "axios"
 import * as Yup from "yup"
 import uploadIcon from "../images/upload-icon.png"
 import "./layout.css"
+import { navigate } from "gatsby"
 
 const LoginForm = () => {
   const { register, errors, handleSubmit, watch, reset } = useForm();
@@ -33,7 +34,8 @@ const LoginForm = () => {
           message: "You've successfully registered!"
         })
         form.resetFields();
-      })
+        navigate(`/login`)
+      }) 
       .catch(err => {
         console.log(err)
         setSubmitError({
