@@ -9,8 +9,6 @@ const Dashboard = ({ children }) => {
     return(
         <>
             <Layout style={{background: '#fff'}} >
-                
-                
             </Layout>
         </>
     )

@@ -198,16 +198,16 @@ const AddRequestForm = () => {
         })
         .catch(err => console.log(err))
     }
-    console.log(parks)
   }, [parks])
 
   const onSubmit = (values) => {
+    
     const postValues = {
-        id: 6,
+        location: values.location.join(' > '),
         time: values.time,
-        location: values.location.join(' > ')
+        
     };
-
+    console.log(postValues);
     AxiosWithAuth().post(`https://disney-kids.herokuapp.com/api/requests`, postValues)
     .then(res => {
       console.log(res);
@@ -252,7 +252,7 @@ const AddRequestForm = () => {
   ]
 
   return (
-    <Form layout="vertical" onFinish={onSubmit}>
+    <Form layout="vertical" onFinish={(onSubmit)}>
       <HeaderRow justify="space-between">
         <Col>
           <h2>Add Request</h2>
