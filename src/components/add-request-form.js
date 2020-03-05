@@ -212,7 +212,7 @@ const AddRequestForm = () => {
     AxiosWithAuth().post(`https://disney-kids.herokuapp.com/api/requests`, postValues)
     .then(res => {
       console.log(res);
-      navigate('/my-account')
+      navigate('/requests')
     })
     .catch(err => {
       console.log(err);
