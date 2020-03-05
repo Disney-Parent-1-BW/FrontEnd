@@ -13,10 +13,10 @@ const Dash = styled.div`
 const MyAccount = () => {
     return (
         <Dash>
-        <Layout>
-            <DashboardHeader />
-            <AccountTable />
-        </Layout>
+            <Layout>
+                <DashboardHeader />
+                <AccountTable />
+            </Layout>
         </Dash>
     )
 }
