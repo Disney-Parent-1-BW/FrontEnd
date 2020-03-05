@@ -14,11 +14,10 @@ const Requests = () => {
     return (
         <div>
             <Dash>
-            <Layout/>
-            <div>
+            <Layout>
             <RequestHeader />
             <RequestTable />
-            </div>
+            </Layout>
             </Dash>
         </div>
     )
