@@ -4,7 +4,7 @@ import ProfileImg from "../images/profile.png"
 import styled from "styled-components"
 import { Link } from "gatsby"
 
-const DashboardHeader = () => {
+const ManageKidsHeader = () => {
   const manageKidsMenu = (
     <Menu>
       <Menu.Item key="0">
@@ -18,7 +18,7 @@ const DashboardHeader = () => {
       <Wrapper />
       <StyledRow justify="space-between" align="middle">
         <Col>
-          <h1>My Account</h1>
+          <h1>Manage Kids</h1>
         </Col>
         <Col>
           <Dropdown overlay={manageKidsMenu} trigger={["click"]} placement="bottomCenter">
@@ -42,4 +42,4 @@ const StyledRow = styled(Row)`
   padding: 0 20px;
 `
 
-export default DashboardHeader
+export default ManageKidsHeader
