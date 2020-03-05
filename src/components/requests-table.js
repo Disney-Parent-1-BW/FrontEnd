@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import AxiosWithAuth from '../components/axiosWithAuth';
+import {Button, Rate} from 'antd';
 import {Table} from 'antd';
 
 const AccountTable = () => {
@@ -11,8 +12,11 @@ const AccountTable = () => {
             console.log(res);
             setRequests(res.data.map(request => {
                 return {
+                    id: request.id,
                     location: request.location,
                     time: request.time,
+                    rating: (<Rate disabled defaultValue={3.4} />),
+                    link: (<Button>Message</Button>)
                 } 
             }));
         })
