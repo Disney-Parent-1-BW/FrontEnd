@@ -1,7 +1,25 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import AxiosWithAuth from '../components/axiosWithAuth';
 import {Table} from 'antd';
 
 const AccountTable = () => {
+    const [requests, setRequests] = useState([]);
+
+    useEffect(() => {
+        AxiosWithAuth().get('https://disney-kids.herokuapp.com/api/requests')
+        .then(res => {
+            console.log(res);
+            setRequests(res.data.map(request => {
+                return {
+                    location: request.location,
+                    time: request.time,
+                } 
+            }));
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    },[])
     
     const columns = [
         {
@@ -39,7 +57,7 @@ const AccountTable = () => {
 
     return (
         <>
-            <Table columns={columns} />
+            <Table columns={columns} dataSource={requests} />
         </>
     )
 }

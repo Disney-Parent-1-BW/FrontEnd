@@ -7,7 +7,6 @@ import styled from 'styled-components';
 const Dash = styled.div`
     display: flex;
     align-content: center;
-    
 `;
 
 const Requests = () => {
