@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react"
 import axios from "axios"
+import { navigate } from 'gatsby';
 import * as Yup from "yup"
 import { useForm } from "react-hook-form"
 import { Row, Input, Button, Form, Alert } from "antd"
