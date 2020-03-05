@@ -3,10 +3,6 @@ import {Form, Input, Button, Alert} from 'antd';
 import {navigate} from 'gatsby';
 import AxiosWithAuth from './axiosWithAuth';
 
-const currentUser = {
-    id: 6
-}
-
 const AddKids = () => {
 
     const [submitError, setSubmitError] = useState({});
