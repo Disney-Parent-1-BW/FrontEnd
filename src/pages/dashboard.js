@@ -9,7 +9,7 @@ const Dash = styled.div`
 `;
 
 
-const Dashboard = ({ children }) => {
+const Dashboard = () => {
 
     return(
         <Dash>

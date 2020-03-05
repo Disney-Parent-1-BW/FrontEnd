@@ -1,4 +1,6 @@
 import React from 'react';
+import DashboardHeader from '../components/dashboard-header';
+import AccountTable from '../components/account-table';
 import Layout from '../components/layout';
 
 const MyAccount = () => {
@@ -6,7 +8,8 @@ const MyAccount = () => {
         <>
         <Layout/>
         <div>
-            My Requests
+            <DashboardHeader />
+            <AccountTable />
         </div>
         </>
     )
