@@ -32,10 +32,10 @@ const Navbar = () => {
                 </Link>
                 </Menu.Item>
                 <Menu.Item key="3" style={{}}>
-                    <Link to="/requests">
+                <Link to="/requests">
                     <IconFont type="icon-Stroller" />
                     <span>Requests</span>
-                    </Link>
+                </Link>
                 </Menu.Item>
             </Menu>
     );
