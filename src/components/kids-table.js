@@ -8,22 +8,13 @@ const KidsTable = () => {
     const [requests, setRequests] = useState([]);
 
     useEffect(() => {
-        AxiosWithAuth().get('https://disney-kids.herokuapp.com/api/requests')
-        .then(res => {
-            console.log(res);
-            setRequests(res.data.map(request => {
-                return {
-                    id: request.id,
-                    location: request.location,
-                    time: request.time,
-                    rating: (<Rate disabled defaultValue={3.4} />),
-                    link: (<Button>Message</Button>)
-                } 
-            }));
-        })
-        .catch(err => {
-            console.log(err);
-        })
+        // AxiosWithAuth().get('https://disney-kids.herokuapp.com/api/requests')
+        // .then(res => {
+            
+        // })
+        // .catch(err => {
+        //     console.log(err);
+        // })
     },[])
     
     const columns = [
