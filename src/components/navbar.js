@@ -26,12 +26,16 @@ const Navbar = () => {
                 </Menu.Item>
                 
                 <Menu.Item key="2" style={{}}>
+                <Link to='/dashboard'>
                     <DashboardOutlined />
                     <span>Dashboard</span>
+                </Link>
                 </Menu.Item>
                 <Menu.Item key="3" style={{}}>
+                    <Link to="/requests">
                     <IconFont type="icon-Stroller" />
                     <span>Requests</span>
+                    </Link>
                 </Menu.Item>
             </Menu>
     );
