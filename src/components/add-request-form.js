@@ -12,6 +12,7 @@ import {
 import axios from "axios"
 import AxiosWithAuth from '../components/axiosWithAuth';
 import styled from "styled-components"
+import { navigate } from "gatsby";
 
 const AddRequestForm = () => {
   const [parks, setParks] = useState({
@@ -211,6 +212,7 @@ const AddRequestForm = () => {
     AxiosWithAuth().post(`https://disney-kids.herokuapp.com/api/requests`, postValues)
     .then(res => {
       console.log(res);
+      navigate('/requests')
     })
     .catch(err => {
       console.log(err);

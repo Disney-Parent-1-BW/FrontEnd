@@ -1,6 +1,7 @@
 import React from 'react';
 import {Row, Col, Button} from 'antd';
 import ProfileImg from '../images/profile.png';
+import { Link } from 'gatsby'
 import styled from 'styled-components';
 
 const RequestHeader = () => {
@@ -12,7 +13,7 @@ const RequestHeader = () => {
                     <h1>Requests</h1>
                 </Col>
                 <Col>
-                    <Button type='primary' size='large'>Add Request</Button>
+                <Link to='/add-request'><Button type='primary' size='large'>Add Request</Button></Link>
                 </Col>
             </StyledRow>
             <Wrapper />
