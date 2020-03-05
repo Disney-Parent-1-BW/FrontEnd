@@ -5,6 +5,8 @@ import { useForm } from "react-hook-form"
 import { Row, Input, Button, Form, Alert } from "antd"
 import styled from "styled-components"
 import "./layout.css"
+import { Link, navigate } from "gatsby"
+
 
 const LoginForm = () => {
   const { register, handleSubmit, watch, errors, reset } = useForm()
@@ -20,11 +22,14 @@ const LoginForm = () => {
     axios.post('https://disney-kids.herokuapp.com/api/auth/login', postValues)
     .then(res => {
       console.log(res);
+      localStorage.setItem("token",res.data.token)
+            
       setSubmitError({
         type: 'success',
         message: 'Successfully logged in'
       })
       form.resetFields();
+      navigate(`/dashboard`)
     })
     .catch(err => {
       console.log(err);
@@ -32,8 +37,11 @@ const LoginForm = () => {
         type: 'error',
         message: 'Login failed. Check your username and password'
       })
+      
       form.resetFields();
+      
     })
+    
   }
 
   const onFinishFailed = ({values, errorFields, outOfDate}) => {
@@ -44,6 +52,7 @@ const LoginForm = () => {
     console.log(errors)
   }, [errors])
 
+  
   return (
     <>
       <FormContainer form={form} layout="vertical" onFinish={onSubmit} onFinishFailed={onFinishFailed}>
@@ -90,7 +99,7 @@ const LoginForm = () => {
         )}
         <Row justify="center">
           <Form.Item>
-            <StyledButton size="large" type="primary" htmlType="submit">
+            <StyledButton  size="large" type="primary" htmlType="submit">
               Login
             </StyledButton>
           </Form.Item>
