@@ -5,20 +5,33 @@ import {Button, Rate} from 'antd';
 import {Table} from 'antd';
 
 const id = Number(localStorage.getItem('user_id'));
-console.log(id);
 
 const AccountTable = () => {
     const [requests, setRequests] = useState([]);
     const [requestsRetrieved, setRequestsRetrieved] = useState(false);
+    const [users, setUsers] = useState([]);
 
     useEffect(() => {
+        AxiosWithAuth().get('https://disney-kids.herokuapp.com/api/users')
+        .then(res => {
+            console.log(res.data);
+            setUsers(res.data);
+        })
+    }, [])
+
+    useEffect(() => {
+        
         AxiosWithAuth().get('https://disney-kids.herokuapp.com/api/requests')
         .then(res => {
             console.log(res.data);
             setRequests(res.data.map(request => {
+                const user =  users.find(user => {
+                    return request.requestor_id == user.id;
+                })
                 if(request.requestor_id !== id){
                     return {
                         id: request.id,
+                        profile: user.name,
                         requestor_id: request.requestor_id,
                         location: request.location,
                         time: request.time,
@@ -28,6 +41,7 @@ const AccountTable = () => {
                 } 
                 return {
                     id: request.id,
+                    profile: user.name,
                         requestor_id: request.requestor_id,
                         location: request.location,
                         time: request.time,
@@ -41,7 +55,7 @@ const AccountTable = () => {
             console.log(err);
         })
 
-    },[])
+    },[users])
 
     useEffect(() => {
         if(requestsRetrieved){
