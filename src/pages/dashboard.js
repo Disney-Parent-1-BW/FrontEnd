@@ -4,7 +4,7 @@ import Layout from '../components/layout';
 
 
 
-const Dashboard = ({ children }) => {
+const Dashboard = () => {
 
     return(
         <>
