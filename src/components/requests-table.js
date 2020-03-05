@@ -4,7 +4,8 @@ import {Link} from 'gatsby';
 import {Button, Rate} from 'antd';
 import {Table} from 'antd';
 
-const id = 2;
+const id = Number(localStorage.getItem('user_id'));
+console.log(id);
 
 const AccountTable = () => {
     const [requests, setRequests] = useState([]);
