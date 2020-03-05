@@ -10,6 +10,7 @@ import {
   Cascader,
 } from "antd"
 import axios from "axios"
+import AxiosWithAuth from '../components/axiosWithAuth';
 import styled from "styled-components"
 
 const AddRequestForm = () => {
@@ -201,10 +202,20 @@ const AddRequestForm = () => {
   }, [parks])
 
   const onSubmit = (values) => {
-    console.log({
+    const postValues = {
+        id: 6,
         time: values.time,
         location: values.location.join(' > ')
-    });
+    };
+
+    AxiosWithAuth().post(`https://disney-kids.herokuapp.com/api/requests`, postValues)
+    .then(res => {
+      console.log(res);
+    })
+    .catch(err => {
+      console.log(err);
+    })
+
   }
 
   const options = [
