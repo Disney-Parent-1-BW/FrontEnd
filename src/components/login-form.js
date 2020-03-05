@@ -21,8 +21,9 @@ const LoginForm = () => {
     }
     axios.post('https://disney-kids.herokuapp.com/api/auth/login', postValues)
     .then(res => {
-      console.log(res);
+      console.log(res.data);
       localStorage.setItem("token",res.data.token)
+      localStorage.setItem('user_id', res.data.user.id)
             
       setSubmitError({
         type: 'success',
