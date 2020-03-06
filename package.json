@@ -30,6 +30,7 @@
     "react-helmet": "^5.2.1",
     "react-hook-form": "^4.10.1",
     "react-is": "^16.13.0",
+    "react-router": "^5.1.2",
     "reactstrap": "^8.4.1",
     "styled-components": "^5.0.1",
     "typescript": "^3.8.3",

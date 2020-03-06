@@ -7,13 +7,13 @@ const AddKids = () => {
 
     const [submitError, setSubmitError] = useState({});
     const onsubmit = (values) => {
-        const postData = {
+        const postData = [{
             name: values.addKidsName,
-            special_instructions: values.specialInstructions
-        }
-        AxiosWithAuth().post(`https://disney-kids.herokuapp.com/api/users/kids`, postData)
+            special_instructions: values.specialInstructions || ''
+        }]
+        console.log(postData);
+        AxiosWithAuth().post(`https://disney-kids.herokuapp.com/api/kids`, postData)
         .then(res => {
-            console.log(res.data);
             navigate('/manage-kids');
         })
         .catch(err => {

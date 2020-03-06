@@ -5,55 +5,36 @@ import {Table} from 'antd';
 import { Link } from 'gatsby';
 
 const KidsTable = () => {
-    const [requests, setRequests] = useState([]);
+    const [kids, setKids] = useState([]);
 
     useEffect(() => {
-        // AxiosWithAuth().get('https://disney-kids.herokuapp.com/api/requests')
-        // .then(res => {
-            
-        // })
-        // .catch(err => {
-        //     console.log(err);
-        // })
+        AxiosWithAuth().get('https://disney-kids.herokuapp.com/api/kids')
+        .then(res => {
+            setKids(res.data);
+        })
+        .catch(err => {
+            console.log(err);
+        })
     },[])
     
     const columns = [
         {
-            title: '',
-            dataIndex: 'profile',
-            key: 'profile'
+            title: 'Name',
+            dataIndex: 'name',
+            key: 'name'
             
         },
         {
-            title: 'Location',
-            dataIndex: 'location',
-            key: 'location'
+            title: 'Special Instructions',
+            dataIndex: 'special_instructions',
+            key: 'special_instructions'
         },
-        {
-            title: 'Time',
-            dataIndex: 'time',
-            key: 'time'
-        },
-        {
-            title: 'Children',
-            dataIndex: 'children',
-            key: 'children'
-        },
-        {
-            title: 'Rating',
-            dataIndex: 'rating',
-            key: 'rating'
-        },
-        {
-            title: '',
-            dataIndex: 'link',
-            key: 'link'
-        }
+       
     ]
 
     return (
         <>
-            <Table columns={columns} dataSource={requests} />
+            <Table columns={columns} dataSource={kids} />
             <Row justify="center">
                 <Link to="/add-kids"><Button type="primary" size="large">Add Kids</Button></Link>
             </Row>
