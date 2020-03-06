@@ -21,11 +21,7 @@ const AccountTable = () => {
 
         AxiosWithAuth().get(' https://disney-kids.herokuapp.com/api/acceptedRequests')
         .then(res => {
-<<<<<<< HEAD
             console.log("this", res.data);
-=======
-            console.log(res);
->>>>>>> e949fa835ddfc8feb91888dfabd3e7d7f358b49b
             setAcceptedRequests(res.data);
         }).catch(err => console.log(err));
     }, [])
@@ -78,7 +74,6 @@ const AccountTable = () => {
             request_id: requestId,
             accepted_by: id
         }
-<<<<<<< HEAD
         console.log(requestId);
         AxiosWithAuth().post('https://disney-kids.herokuapp.com/api/acceptedRequests', postData)
         .then(res => {
@@ -87,20 +82,11 @@ const AccountTable = () => {
                 ...acceptedRequests,
                 res.data
             ]);
-=======
-        // AxiosWithAuth().post('https://disney-kids.herokuapp.com/api/acceptedRequests', postData)
-        // .then(res => {
-        //     console.log('Accepting request', res);
-        //     setAcceptedRequests([
-        //         ...acceptedRequests,
-        //         res.data
-        //     ]);
->>>>>>> e949fa835ddfc8feb91888dfabd3e7d7f358b49b
 
-        // })
-        // .catch(err => {
-        //     console.log(err);
-        // })
+        })
+        .catch(err => {
+            console.log(err);
+        })
     }
     
     const columns = [
