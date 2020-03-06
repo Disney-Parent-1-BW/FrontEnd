@@ -27,7 +27,7 @@ const LoginForm = () => {
         message: 'Successfully logged in'
       })
       form.resetFields();
-      history.push('/dashboard')
+      history.push('/dashboard/my-account')
     })
     .catch(err => {
       console.log(err);

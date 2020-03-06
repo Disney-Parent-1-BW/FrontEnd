@@ -26,7 +26,7 @@ const Wrapper = styled.div`
 `;
 
 const StyledRow = styled(Row)`
-    height: 146px;
+    height: 188px;
     background: #F7F7F7;
     padding: 0 20px;
 `;

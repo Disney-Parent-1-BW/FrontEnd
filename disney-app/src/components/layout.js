@@ -23,12 +23,13 @@ const LayoutComponent = ({  }) => {
   return (
     <Dash>
       <Sider
-        width="240px"
+        width="210px"
         trigger={null}
         collapsible
         collapsed={collapsed}
         style={{ minHeight: "100vh", background: "#7D70FE" }}
       >
+        <div style={{height: '42px', background: '#F83E49'}} ></div>
         <img style={{maxWidth: '100%'}} src={Image} />
         <Navbar />
       </Sider>

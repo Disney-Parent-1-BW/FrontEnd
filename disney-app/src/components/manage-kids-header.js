@@ -8,7 +8,7 @@ const ManageKidsHeader = () => {
   const manageKidsMenu = (
     <Menu>
       <Menu.Item key="0">
-        <Link to="/manage-kids">Manage Kids</Link>
+        <Link to="/dashboard/manage-kids">Manage Kids</Link>
       </Menu.Item>
     </Menu>
   )
@@ -37,7 +37,7 @@ const Wrapper = styled.div`
 `
 
 const StyledRow = styled(Row)`
-  height: 146px;
+  height: 188px;
   background: #f7f7f7;
   padding: 0 20px;
 `

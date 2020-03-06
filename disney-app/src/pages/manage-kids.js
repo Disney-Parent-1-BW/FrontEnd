@@ -11,10 +11,10 @@ const Dash = styled.div`
 
 const ManageKids = () => {
     return (
-        <div>
+        <>
             <MangeKidsHeader />
             <KidsTable />
-        </div>
+        </>
     )
 }
 
