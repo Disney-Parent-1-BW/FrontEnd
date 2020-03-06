@@ -8,6 +8,8 @@ import Navbar from '../components/navbar';
 import MyAccount from '../pages/my-account';
 import Requests from '../pages/requests';
 import ManageKids from '../pages/manage-kids';
+import AddKids from '../pages/add-kids';
+import AddRequest from '../pages/add-request';
 import "./layout.css"
 
 const {Sider, Content} = Layout;
@@ -45,6 +47,12 @@ const LayoutComponent = ({  }) => {
         </Route>
         <Route path='/dashboard/manage-kids'>
           <ManageKids />
+        </Route>
+        <Route path='/dashboard/add-kids'>
+            <AddKids />
+        </Route>
+        <Route path='/dashboard/add-request'>
+            <AddRequest />
         </Route>
       </Content>
     </Dash>

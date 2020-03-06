@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import {Form, Input, Button, Alert} from 'antd';
-import {navigate} from 'gatsby';
+import {useHistory} from 'react-router-dom';
 import AxiosWithAuth from './axiosWithAuth';
 
 const AddKids = () => {
 
     const [submitError, setSubmitError] = useState({});
+    const history = useHistory();
+
     const onsubmit = (values) => {
         const postData = [{
             name: values.addKidsName,
@@ -14,7 +16,7 @@ const AddKids = () => {
         console.log(postData);
         AxiosWithAuth().post(`https://disney-kids.herokuapp.com/api/kids`, postData)
         .then(res => {
-            navigate('/manage-kids');
+            history.push('/dashboard/manage-kids');
         })
         .catch(err => {
             console.log(err);

@@ -89,6 +89,7 @@ const LoginForm = () => {
           </Form.Item>
         </Row>
       </FormContainer>
+      <Link to="/registration">Don't have an account?</Link>
     </>
   )
 }

@@ -15,12 +15,13 @@ function App() {
     <Route path="/login">
       <Login />
     </Route>
-    <Route path="registration">
+    <Route path="/registration">
       <Register />
     </Route>
     <Route path="/dashboard">
       <Dashboard />
     </Route>
+
     </>
   );
 }

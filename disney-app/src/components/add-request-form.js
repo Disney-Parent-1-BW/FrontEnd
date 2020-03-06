@@ -10,7 +10,7 @@ import {
 import axios from "axios"
 import AxiosWithAuth from '../components/axiosWithAuth';
 import styled from "styled-components"
-import { navigate } from "gatsby";
+import { useHistory } from "react-router-dom";
 
 const AddRequestForm = () => {
   const [parks, setParks] = useState({
@@ -21,6 +21,8 @@ const AddRequestForm = () => {
     blizzardBeach: [],
     typhoonLagoon: [],
   })
+  const history = useHistory();
+
   const generateTimeArray = () => {
     var x = 30 //minutes interval
     var times = [] // time array
@@ -210,7 +212,7 @@ const AddRequestForm = () => {
     AxiosWithAuth().post(`https://disney-kids.herokuapp.com/api/requests`, postValues)
     .then(res => {
       console.log(res);
-      navigate('/requests')
+      history.push('/requests')
     })
     .catch(err => {
       console.log(err);
