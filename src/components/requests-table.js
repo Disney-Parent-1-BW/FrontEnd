@@ -3,8 +3,9 @@ import AxiosWithAuth from '../components/axiosWithAuth';
 import {Link} from 'gatsby';
 import {Button, Rate} from 'antd';
 import {Table} from 'antd';
+import userId from './getCurrentUser';
 
-const id = Number(localStorage.getItem('user_id'));
+const id = userId
 
 const AccountTable = () => {
     const [requests, setRequests] = useState([]);
@@ -20,7 +21,9 @@ const AccountTable = () => {
 
         AxiosWithAuth().get(' https://disney-kids.herokuapp.com/api/acceptedRequests')
         .then(res => {
-            console.log(res);
+
+            console.log("this", res.data);
+
             setAcceptedRequests(res.data);
         }).catch(err => console.log(err));
     }, [])
@@ -73,13 +76,16 @@ const AccountTable = () => {
             request_id: requestId,
             accepted_by: id
         }
-        // AxiosWithAuth().post('https://disney-kids.herokuapp.com/api/acceptedRequests', postData)
-        // .then(res => {
-        //     console.log('Accepting request', res);
-        //     setAcceptedRequests([
-        //         ...acceptedRequests,
-        //         res.data
-        //     ]);
+
+        console.log(requestId);
+        AxiosWithAuth().post('https://disney-kids.herokuapp.com/api/acceptedRequests', postData)
+        .then(res => {
+            console.log('Accepting request', res);
+            setAcceptedRequests([
+                ...acceptedRequests,
+                res.data
+            ]);
+
 
         // })
         // .catch(err => {
