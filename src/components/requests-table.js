@@ -3,15 +3,14 @@ import AxiosWithAuth from '../components/axiosWithAuth';
 import {Link} from 'gatsby';
 import {Button, Rate} from 'antd';
 import {Table} from 'antd';
-import userId from './getCurrentUser';
 
-const id = userId
 
 const AccountTable = () => {
     const [requests, setRequests] = useState([]);
     const [requestsRetrieved, setRequestsRetrieved] = useState(false);
     const [acceptedRequests, setAcceptedRequests] = useState([]);
     const [users, setUsers] = useState([]);
+    const id = Number(localStorage.getItem('user_id'));
 
     useEffect(() => {
         AxiosWithAuth().get('https://disney-kids.herokuapp.com/api/users')
