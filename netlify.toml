@@ -1,0 +1,4 @@
+[build]
+base = "disney-app/"
+publish = "disney-app/build"
+command = "yarn build"
