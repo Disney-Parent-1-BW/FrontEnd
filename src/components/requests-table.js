@@ -10,22 +10,22 @@ const AccountTable = () => {
     const [requestsRetrieved, setRequestsRetrieved] = useState(false);
     const [acceptedRequests, setAcceptedRequests] = useState([]);
     const [users, setUsers] = useState([]);
-    const id = Number(localStorage.getItem('user_id'));
-
+    
     useEffect(() => {
         AxiosWithAuth().get('https://disney-kids.herokuapp.com/api/users')
         .then(res => {
             setUsers(res.data);
         })
-
+        
         AxiosWithAuth().get(' https://disney-kids.herokuapp.com/api/acceptedRequests')
         .then(res => {
             console.log("this", res.data);
             setAcceptedRequests(res.data);
         }).catch(err => console.log(err));
     }, [])
-
+    
     useEffect(() => {
+        const id = Number(localStorage.getItem('user_id'));
         
         AxiosWithAuth().get('https://disney-kids.herokuapp.com/api/requests')
         .then(res => {
@@ -69,6 +69,8 @@ const AccountTable = () => {
     },[users, acceptedRequests])
 
     const handleClick = (requestId) => {
+        const id = Number(localStorage.getItem('user_id'));
+
         const postData = {
             request_id: requestId,
             accepted_by: id
