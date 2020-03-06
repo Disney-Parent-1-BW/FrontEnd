@@ -2,7 +2,7 @@ import React from 'react';
 import {Route} from 'react-router-dom';
 import Login from './pages/login';
 import Register from './pages/registration';
-import Index from './pages/index';
+import Index from './pages/main';
 import Dashboard from './pages/dashboard';
 import './App.css';
 
