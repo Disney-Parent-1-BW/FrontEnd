@@ -15,7 +15,6 @@ const RequestHeader = () => {
                 <Link to='/dashboard/add-request'><Button type='primary' size='large'>Add Request</Button></Link>
                 </Col>
             </StyledRow>
-            <Wrapper />
         </div>
     )
 }
@@ -26,7 +25,7 @@ const Wrapper = styled.div`
 `;
 
 const StyledRow = styled(Row)`
-    height: 188px;
+    height: 146px;
     background: #F7F7F7;
     padding: 0 20px;
 `;

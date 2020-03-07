@@ -26,7 +26,6 @@ const DashboardHeader = () => {
           </Dropdown>
         </Col>
       </StyledRow>
-      <Wrapper />
     </div>
   )
 }
@@ -37,7 +36,7 @@ const Wrapper = styled.div`
 `
 
 const StyledRow = styled(Row)`
-  height: 188px;
+  height: 146px;
   background: #f7f7f7;
   padding: 0 20px;
 `
