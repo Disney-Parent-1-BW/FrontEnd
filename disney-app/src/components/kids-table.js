@@ -2,7 +2,8 @@ import React, {useState, useEffect} from 'react';
 import AxiosWithAuth from '../components/axiosWithAuth';
 import {Button, Rate, Row} from 'antd';
 import {Table} from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
+import AddKids from '../pages/add-kids';
 
 const KidsTable = () => {
     const [kids, setKids] = useState([]);
@@ -36,7 +37,7 @@ const KidsTable = () => {
         <>
             <Table columns={columns} dataSource={kids} />
             <Row justify="center">
-                <Link to="/add-kids"><Button type="primary" size="large">Add Kids</Button></Link>
+                <Link to="/dashboard/add-kids"><Button type="primary" size="large">Add Kids</Button></Link>
             </Row>
         </>
     )

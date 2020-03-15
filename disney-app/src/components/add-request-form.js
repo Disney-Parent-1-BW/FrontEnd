@@ -8,11 +8,15 @@ import {
   Cascader,
 } from "antd"
 import axios from "axios"
+import { connect } from 'react-redux';
+import { addParkData } from '../actions/parkActions';
 import AxiosWithAuth from '../components/axiosWithAuth';
 import styled from "styled-components"
-import { navigate } from "gatsby";
+import { useHistory } from "react-router-dom";
 
-const AddRequestForm = () => {
+let i = 0;
+
+const AddRequestForm = (props) => {
   const [parks, setParks] = useState({
     epcot: [],
     magicKingdom: [],
@@ -21,6 +25,8 @@ const AddRequestForm = () => {
     blizzardBeach: [],
     typhoonLagoon: [],
   })
+  const history = useHistory();
+
   const generateTimeArray = () => {
     var x = 30 //minutes interval
     var times = [] // time array
@@ -43,161 +49,13 @@ const AddRequestForm = () => {
   }
 
   useEffect(() => {
-    if (parks.magicKingdom.length < 1) {
-      axios
-        .get("https://disneyparksapi.firebaseio.com/orlando/parks/0.json")
-        .then(res => {
-          setParks({
-            ...parks,
-            magicKingdom: res.data.lands
-              .filter(land => {
-                if (land.attractions) {
-                  return land
-                }
-              })
-              .map(land => {
-                if (land.attractions) {
-                  return {
-                    value: land.name,
-                    label: land.name,
-                    children: land.attractions.map(attraction => {
-                      return {
-                        value: attraction.name,
-                        label: attraction.name,
-                      }
-                    }),
-                  }
-                }
-              }),
-          })
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    }
-    if (parks.epcot.length < 1) {
-      axios
-        .get("https://disneyparksapi.firebaseio.com/orlando/parks/1.json")
-        .then(res => {
-          setParks({
-            ...parks,
-            epcot: res.data.lands
-              .filter(land => {
-                if (land.attractions) {
-                  return land
-                }
-              })
-              .map(land => {
-                if (land.attractions) {
-                  return {
-                    value: land.name,
-                    label: land.name,
-                    children: land.attractions.map(attraction => {
-                      return {
-                        value: attraction.name,
-                        label: attraction.name,
-                      }
-                    }),
-                  }
-                }
-              }),
-          })
-        })
-        .catch(err => console.log(err))
-    }
-    if (parks.hollywoodStudios.length < 1) {
-      axios
-        .get("https://disneyparksapi.firebaseio.com/orlando/parks/2.json")
-        .then(res => {
-          setParks({
-            ...parks,
-            hollywoodStudios: res.data.lands
-              .filter(land => {
-                if (land.attractions) {
-                  return land
-                }
-              })
-              .map(land => {
-                if (land.attractions) {
-                  return {
-                    value: land.name,
-                    label: land.name,
-                    children: land.attractions.map(attraction => {
-                      return {
-                        value: attraction.name,
-                        label: attraction.name,
-                      }
-                    }),
-                  }
-                }
-              }),
-          })
-        })
-        .catch(err => console.log(err))
-    }
-    if (parks.animalKingdom.length) {
-      axios
-        .get("https://disneyparksapi.firebaseio.com/orlando/parks/3.json")
-        .then(res => {
-          setParks({
-            ...parks,
-            animalKingdom: res.data.lands
-              .filter(land => {
-                if (land.attractions) {
-                  return land
-                }
-              })
-              .map(land => {
-                if (land.attractions) {
-                  return {
-                    value: land.name,
-                    label: land.name,
-                    children: land.attractions.map(attraction => {
-                      return {
-                        value: attraction.name,
-                        label: attraction.name,
-                      }
-                    }),
-                  }
-                }
-              }),
-          })
-        })
-        .catch(err => console.log(err))
-    }
-    if (parks.blizzardBeach.length < 1) {
-      axios
-        .get("https://disneyparksapi.firebaseio.com/orlando/parks/4.json")
-        .then(res => {
-          setParks({
-            ...parks,
-            blizzardBeach: res.data.attractions.map(attraction => {
-              return {
-                value: attraction.name,
-                label: attraction.name,
-              }
-            }),
-          })
-        })
-        .catch(err => console.log(err))
-    }
-    if (parks.typhoonLagoon.length < 1) {
-      axios
-        .get("https://disneyparksapi.firebaseio.com/orlando/parks/5.json")
-        .then(res => {
-          setParks({
-            ...parks,
-            typhoonLagoon: res.data.attractions.map(attraction => {
-              return {
-                value: attraction.name,
-                label: attraction.name,
-              }
-            }),
-          })
-        })
-        .catch(err => console.log(err))
-    }
-  }, [parks])
+    props.addParkData('magicKingdom', 'https://disneyparksapi.firebaseio.com/orlando/parks/0.json');
+    props.addParkData('epcot', 'https://disneyparksapi.firebaseio.com/orlando/parks/1.json');
+    props.addParkData('hollywoodStudios', 'https://disneyparksapi.firebaseio.com/orlando/parks/2.json');
+    props.addParkData('animalKingdom', 'https://disneyparksapi.firebaseio.com/orlando/parks/3.json');
+    props.addParkData('blizzardBeach', 'https://disneyparksapi.firebaseio.com/orlando/parks/4.json');
+    props.addParkData('typhoonLagoon', 'https://disneyparksapi.firebaseio.com/orlando/parks/5.json');
+  }, [])
 
   const onSubmit = (values) => {
     
@@ -206,11 +64,10 @@ const AddRequestForm = () => {
         time: values.time,
         
     };
-    console.log(postValues);
     AxiosWithAuth().post(`https://disney-kids.herokuapp.com/api/requests`, postValues)
     .then(res => {
       console.log(res);
-      navigate('/requests')
+      history.push('/requests')
     })
     .catch(err => {
       console.log(err);
@@ -222,32 +79,32 @@ const AddRequestForm = () => {
     {
       value: "magicKingdom",
       label: "Magic Kingdom",
-      children: parks.magicKingdom,
+      children: props.magicKingdom,
     },
     {
       value: "epcot",
       label: "Epcot",
-      children: parks.epcot,
+      children: props.epcot,
     },
     {
       value: "hollywoodStudios",
       label: "Hollywood Studios",
-      children: parks.hollywoodStudios,
+      children: props.hollywoodStudios,
     },
     {
       value: "animalKingdom",
       label: "Animal Kingdom",
-      children: parks.animalKingdom,
+      children: props.animalKingdom,
     },
     {
       value: "blizzardBeach",
       label: "Blizzard Beach",
-      children: parks.blizzardBeach,
+      children: props.blizzardBeach,
     },
     {
       value: "typhoonLagoon",
       label: "Typhoon Lagoon",
-      children: parks.typhoonLagoon,
+      children: props.typhoonLagoon,
     },
   ]
 
@@ -313,4 +170,11 @@ const HeaderRow = styled(Row)`
   padding-bottom: 20px;
 `
 
-export default AddRequestForm
+const mapStateToProps = (state) => {
+  console.log(state.parksReducer);
+  return state.parksReducer
+}
+
+export default connect(mapStateToProps, {
+  addParkData
+})(AddRequestForm);

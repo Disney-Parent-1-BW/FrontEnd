@@ -4,7 +4,7 @@ import { Row, Button, Input, Form, Upload, Checkbox } from "antd"
 import { InboxOutlined } from "@ant-design/icons"
 import axios from "axios"
 import "./layout.css"
-import { useHistory } from "react-router-dom"
+import { useHistory, Link } from "react-router-dom"
 
 const LoginForm = () => {
   const [form] = Form.useForm();
@@ -158,6 +158,7 @@ const LoginForm = () => {
           </StyledButton>
         </Row>
       </FormContainer>
+      <Link to="/login">Already have an account?</Link>
     </>
   )
 }

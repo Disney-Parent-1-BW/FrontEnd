@@ -9,12 +9,10 @@ const RequestHeader = () => {
             <Wrapper />
             <StyledRow justify="space-between" align="middle">
                 <Col>  
-                    <h1>Requests</h1>
-                </Col>
-                <Col>
-                <Link to='/dashboard/add-request'><Button type='primary' size='large'>Add Request</Button></Link>
+                    <h1>Add Requests</h1>
                 </Col>
             </StyledRow>
+            <Wrapper />
         </div>
     )
 }
