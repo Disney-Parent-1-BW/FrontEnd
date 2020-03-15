@@ -56,6 +56,7 @@ const MenuItem = styled(Menu.Item)`
     a{
         color: white;
         font-size: 24px;
+        font-weight:200;
     }
 `;
 
@@ -75,7 +76,7 @@ const StyledMenu = styled(Menu)`
         padding-left: 25px;
 
         svg {
-            width: 24px;
+            width: 20px;
             height: auto;
         }
     }
